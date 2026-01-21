@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Shreeji Group | Cafe • Restaurant • PizzaGhar</title>
+<title>Shreeji Group | Cafe • Restaurant • Pizzaghar</title>
 
 <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#d62828">
@@ -73,6 +73,28 @@ header{
 .close{
   background:#ccc!important;color:#000!important;
 }
+.brand-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 12px;
+  border-radius: 10px;
+  border: 1px solid #e0e0e0;
+  background: #fff;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.brand-btn.active {
+  background: #ffefe6;
+  border-color: #ff6f00;
+}
+
+.brand-logo {
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+}
 
 footer{text-align:center;font-size:12px;padding:16px;color:#666}
 </style>
@@ -86,9 +108,9 @@ footer{text-align:center;font-size:12px;padding:16px;color:#666}
 </header>
 
 <div class="brand-switch">
-  <button class="active" onclick="setBrand('cafe',this)">☕ Cafe</button>
-  <button onclick="setBrand('restaurant',this)">🍽️ Restaurant</button>
-  <button onclick="setBrand('pizza',this)">🍕 PizzaGhar</button>
+  <button class="active" onclick="setBrand('cafe',this)"><img src="cafe-logo.png" alt="Cafe Logo" class="brand-logo"></button>
+  <button onclick="setBrand('restaurant',this)"> <img src="restaurant-logo.png">🍽️ Restaurant</button>
+  <button onclick="setBrand('pizza',this)"> <img src="pizzaghar-logo.png">🍕 PizzaGhar</button>
 </div>
 
 <div id="content"></div>
@@ -119,19 +141,19 @@ const brands={
   cafe:{
     name:"Shreeji Café",
     desc:"Fresh coffee & snacks",
-    menu:"#",
+    menu:"https://shreetenguria-cpu.github.io/menu",
     insta:"https://instagram.com/shreeji_cafe"
   },
   restaurant:{
     name:"Shreeji Restaurant",
     desc:"Family dining meals",
-    menu:"#",
+    menu:"https://shreetenguria-cpu.github.io/menu",
     insta:"https://instagram.com/shreeji_restaurant"
   },
   pizza:{
     name:"PizzaGhar (By Shreeji)",
     desc:"Fresh • Cheesy • Desi Pizzas",
-    menu:"#",
+    menu:"https://shreetenguria-cpu.github.io/menu",
     insta:"https://instagram.com/pizzaghar_guitla"
   }
 };
