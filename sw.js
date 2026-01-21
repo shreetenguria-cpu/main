@@ -7,8 +7,11 @@ self.addEventListener("install",e=>{
 });
 
 window.onload = () => {
-  setBrand('cafe', document.querySelector('.brand-btn'));
+  const saved = localStorage.getItem("activeBrand") || "cafe";
+  const btn = document.querySelector(`.brand-btn[onclick*="${saved}"]`);
+  setBrand(saved, btn);
 };
+
 
 self.addEventListener("fetch",e=>{
   e.respondWith(
