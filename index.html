@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shreeji Group | Cafe • Restaurant • PizzaGhar</title>
+
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#d62828">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --primary:#d62828;
+  --secondary:#f7b801;
+  --dark:#1f1f1f;
+  --light:#fff;
+  --gray:#f5f5f5;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Poppins;background:var(--gray);color:var(--dark)}
+
+header{
+  background:var(--primary);
+  color:#fff;
+  padding:16px;
+  text-align:center;
+}
+.brand-switch{
+  display:flex;gap:8px;justify-content:center;
+  padding:12px;
+}
+.brand-switch button{
+  padding:8px 14px;border:none;border-radius:20px;
+  font-weight:600;cursor:pointer;background:#fff;
+}
+.brand-switch button.active{
+  background:var(--primary);color:#fff;
+}
+.card{
+  background:#fff;margin:14px;padding:16px;
+  border-radius:16px;
+  box-shadow:0 4px 12px rgba(0,0,0,.1);
+}
+.btn{
+  display:block;width:100%;padding:14px;
+  margin-top:10px;border-radius:12px;
+  font-weight:600;text-align:center;text-decoration:none;
+}
+.btn-wa{background:#25D366;color:#fff}
+.btn-menu{background:var(--secondary);color:#000}
+.btn-insta{background:#E1306C;color:#fff}
+.btn-install{background:#000;color:#fff}
+
+/* Offer Popup */
+#offerPopup{
+  position:fixed;top:0;left:0;right:0;bottom:0;
+  background:rgba(0,0,0,.6);
+  display:none;align-items:center;justify-content:center;
+  z-index:999;
+}
+.popup-box{
+  background:#fff;width:90%;max-width:320px;
+  padding:20px;border-radius:18px;text-align:center;
+}
+.popup-box h2{color:var(--primary)}
+.popup-box button{
+  margin-top:12px;padding:10px 16px;
+  border:none;border-radius:20px;
+  background:var(--primary);color:#fff;font-weight:600;
+}
+.close{
+  background:#ccc!important;color:#000!important;
+}
+
+footer{text-align:center;font-size:12px;padding:16px;color:#666}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h2>Shreeji Group</h2>
+  <p>Cafe • Restaurant • PizzaGhar</p>
+</header>
+
+<div class="brand-switch">
+  <button class="active" onclick="setBrand('cafe',this)">☕ Cafe</button>
+  <button onclick="setBrand('restaurant',this)">🍽️ Restaurant</button>
+  <button onclick="setBrand('pizza',this)">🍕 PizzaGhar</button>
+</div>
+
+<div id="content"></div>
+
+<!-- Install App Button -->
+<div class="card">
+  <a class="btn btn-install" id="installBtn" style="display:none">
+    📲 Install App
+  </a>
+</div>
+
+<footer>© 2026 Shreeji Group • Guitla</footer>
+
+<!-- OFFER POPUP -->
+<div id="offerPopup">
+  <div class="popup-box">
+    <h2>🔥 Today’s Offer</h2>
+    <p>Order from PizzaGhar & get<br><b>FREE Dip / Cold Drink</b></p>
+    <button onclick="closeOffer()">Order Now</button>
+    <button class="close" onclick="closeOffer()">Later</button>
+  </div>
+</div>
+
+<script>
+const phone = "918512034223";
+
+const brands={
+  cafe:{
+    name:"Shreeji Café",
+    desc:"Fresh coffee & snacks",
+    menu:"#",
+    insta:"https://instagram.com/shreeji_cafe"
+  },
+  restaurant:{
+    name:"Shreeji Restaurant",
+    desc:"Family dining meals",
+    menu:"#",
+    insta:"https://instagram.com/shreeji_restaurant"
+  },
+  pizza:{
+    name:"PizzaGhar (By Shreeji)",
+    desc:"Fresh • Cheesy • Desi Pizzas",
+    menu:"#",
+    insta:"https://instagram.com/pizzaghar_guitla"
+  }
+};
+
+function setBrand(type,el){
+  document.querySelectorAll('.brand-switch button')
+    .forEach(b=>b.classList.remove('active'));
+  el.classList.add('active');
+
+  const b=brands[type];
+  document.getElementById("content").innerHTML=`
+  <div class="card">
+    <h3>${b.name}</h3>
+    <p>${b.desc}</p>
+
+    <a class="btn btn-menu" href="${b.menu}">📖 View Menu</a>
+    <a class="btn btn-wa"
+       href="https://wa.me/${phone}?text=Hello%20${b.name}%20I%20want%20to%20order">
+       📲 Order on WhatsApp
+    </a>
+    <a class="btn btn-insta" href="${b.insta}">
+       📸 Follow on Instagram
+    </a>
+  </div>`;
+}
+setBrand('cafe',document.querySelector('.brand-switch button'));
+
+/* OFFER POPUP */
+if(!localStorage.getItem("offerSeen")){
+  setTimeout(()=>document.getElementById("offerPopup").style.display="flex",2500);
+}
+function closeOffer(){
+  localStorage.setItem("offerSeen","yes");
+  document.getElementById("offerPopup").style.display="none";
+}
+
+/* PWA INSTALL */
+let deferredPrompt;
+window.addEventListener("beforeinstallprompt",e=>{
+  e.preventDefault();
+  deferredPrompt=e;
+  document.getElementById("installBtn").style.display="block";
+});
+document.getElementById("installBtn").onclick=()=>{
+  deferredPrompt.prompt();
+};
+
+/* SERVICE WORKER */
+if("serviceWorker" in navigator){
+  navigator.serviceWorker.register("sw.js");
+}
+</script>
+
+</body>
+</html>
