@@ -224,6 +224,12 @@ document.getElementById("installBtn").onclick=()=>{
 if("serviceWorker" in navigator){
   navigator.serviceWorker.register("sw.js");
 }
+  window.onload = () => {
+  const saved = localStorage.getItem("activeBrand") || "cafe";
+  const btn = document.querySelector(`.brand-btn[onclick*="${saved}"]`);
+  if (btn) setBrand(saved, btn);
+};
+
 </script>
 
 </body>
