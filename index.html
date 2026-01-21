@@ -28,8 +28,11 @@ header{
   text-align:center;
 }
 .brand-switch{
-  display:flex;gap:8px;justify-content:center;
+  display:flex;
+  gap:10px;
+  justify-content:center;
   padding:12px;
+  flex-wrap:wrap;
 }
 .brand-switch button{
   padding:8px 14px;border:none;border-radius:20px;
@@ -73,28 +76,32 @@ header{
 .close{
   background:#ccc!important;color:#000!important;
 }
-.brand-btn {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  padding: 8px 12px;
-  border-radius: 10px;
-  border: 1px solid #e0e0e0;
-  background: #fff;
-  font-weight: 600;
-  cursor: pointer;
+
+.brand-btn{
+  display:flex;
+  align-items:center;
+  gap:6px;
+  padding:8px 14px;
+  border:none;
+  border-radius:20px;
+  font-weight:600;
+  cursor:pointer;
+  background:#fff;
+  box-shadow:0 2px 6px rgba(0,0,0,.1);
+  transition:.25s;
+}
+.brand-btn.active{
+  background:var(--primary);
+  color:#fff;
+  transform:scale(1.05);
 }
 
-.brand-btn.active {
-  background: #ffefe6;
-  border-color: #ff6f00;
+.brand-logo{
+  width:22px;
+  height:22px;
+  object-fit:contain;
 }
 
-.brand-logo {
-  width: 22px;
-  height: 22px;
-  object-fit: contain;
-}
 
 footer{text-align:center;font-size:12px;padding:16px;color:#666}
 </style>
@@ -108,10 +115,22 @@ footer{text-align:center;font-size:12px;padding:16px;color:#666}
 </header>
 
 <div class="brand-switch">
-  <button class="active" onclick="setBrand('cafe',this)"><img src="cafe-logo.png" alt="Cafe Logo" class="brand-logo">Cafe</button>
-  <button class="active" onclick="setBrand('restaurant',this)"> <img src="restaurant-logo.png" alt="Restaurant Logo" class="brand-logo>🍽️ Restaurant</button>
-  <button class="active" onclick="setBrand('pizza',this)"> <img src="pizzaghar-logo.png" alt="Pizzaghar Logo" class="brand-logo>🍕 PizzaGhar</button>
+  <button class="brand-btn active" onclick="setBrand('cafe',this)">
+    <img src="cafe-logo.png" alt="Cafe Logo" class="brand-logo">
+    Cafe
+  </button>
+
+  <button class="brand-btn" onclick="setBrand('restaurant',this)">
+    <img src="restaurant-logo.png" alt="Restaurant Logo" class="brand-logo">
+    Restaurant
+  </button>
+
+  <button class="brand-btn" onclick="setBrand('pizza',this)">
+    <img src="pizzaghar-logo.png" alt="Pizzaghar Logo" class="brand-logo">
+    PizzaGhar
+  </button>
 </div>
+
 
 <div id="content"></div>
 
