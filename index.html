@@ -251,6 +251,7 @@ function openTab(tab, btn){
 }
 
 function setBrand(type,el){
+ localStorage.setItem("activeBrand", type);
   document.querySelectorAll('.brand-switch button')
     .forEach(b=>b.classList.remove('active'));
   el.classList.add('active');
